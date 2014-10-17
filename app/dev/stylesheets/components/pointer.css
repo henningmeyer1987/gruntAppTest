@@ -5,7 +5,7 @@ div.pointer-position
 }
 
 /* Textarea welche die Position des Mauszeiger beinhaltet */
-textarea.pointer-position
+#pointer-textarea
 {
 	border-radius: 7px;
 }
