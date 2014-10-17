@@ -1,0 +1,11 @@
+/* Positionierung des divs welches die Textarea für die Angabe der Position des Mauszeigers enthält */
+div.pointer-position
+{
+	margin-left:50px;
+}
+
+/* Textarea welche die Position des Mauszeiger beinhaltet */
+textarea.pointer-position
+{
+	border-radius: 7px;
+}
