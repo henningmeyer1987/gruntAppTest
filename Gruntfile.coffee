@@ -6,7 +6,7 @@ module.exports = (grunt) ->
 
 		watch:
 			livereload:
-				files: ["app/*"]
+				files: ["app/**"]
 				options:
 					livereload: true
 
