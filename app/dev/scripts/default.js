@@ -14,4 +14,8 @@ function getPositionPointerXY (event) {
 
 	/* Ausgabe der Position in der eben ausgewählten Textarea */
 	textareaPointer[0].value = positionOutput;
+
+	/* Positioniert das Div direkt am Mauszeiger */
+	$('.background-div').css({'top': yPosition + 'px',
+							'left' : xPosition + 'px'});
 }
