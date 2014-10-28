@@ -1,0 +1,23 @@
+.background-div
+{
+	position:absolute;
+	border-radius: 10px;
+	background-color: darkblue;
+	color:white;
+	width:210px;
+	height:100px;
+	box-shadow: 5px 5px 5px 6px darkgrey;
+}
+
+/* Positionierung des divs welches die Textarea für die Angabe der Position des Mauszeigers enthält */
+div.pointer-position
+{
+	position: relative;
+	margin-left:12px;
+}
+
+/* Textarea welche die Position des Mauszeiger beinhaltet */
+#pointer-textarea
+{
+	border-radius: 7px;
+}

@@ -24,12 +24,25 @@ module.exports = (grunt) ->
 					dest:'app/build/js'
 					ext: '.js'
 				]
+		copy: 
+			main:
+				expand:true
+				cwd: 'app/dev/'
+				src: '*.html'
+				dest:'app/build'
+			css:
+				expand:true
+				cwd: 'app/dev/stylesheets'
+				src: '*.css'
+				dest:'app/build/css'				
+
 
 	for plugin in [
 			"grunt-contrib-watch"
 			"grunt-contrib-coffee"
+			"grunt-contrib-copy"
 	]
 			grunt.loadNpmTasks plugin
 
 
-	grunt.registerTask "default", ["watch", "coffee"]
+	grunt.registerTask "default", ["coffee", "copy","watch"]
