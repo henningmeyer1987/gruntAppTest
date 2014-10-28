@@ -1,1 +1,0 @@
-alert "Dies ist ein Blöder Test"
