@@ -34,7 +34,12 @@ module.exports = (grunt) ->
 				expand:true
 				cwd: 'app/dev/stylesheets'
 				src: '*.css'
-				dest:'app/build/css'				
+				dest:'app/build/css'
+			vendor:
+				expand:true
+				cwd: 'app/dev/vendor'
+				src:'*'
+				dest:'app/build/vendor'				
 
 
 	for plugin in [
