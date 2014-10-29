@@ -37,9 +37,9 @@ module.exports = (grunt) ->
 				dest:'app/build/css'
 			vendor:
 				expand:true
-				cwd: 'app/dev/vendor'
-				src:'*'
-				dest:'app/build/vendor'				
+				cwd: 'app/dev/vendor/jquery/dist'
+				src:'jquery.min.js'
+				dest:'app/build/vendor/jquery'				
 
 
 	for plugin in [
