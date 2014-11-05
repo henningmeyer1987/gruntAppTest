@@ -3,28 +3,47 @@ module.exports = (grunt) ->
 	grunt.initConfig
 		pkg: grunt.file.readJSON("package.json")
 
-		watch:
-			livereload:
-				files: ["app/**"]
+		browserify:
+			app:
+				src: ["app/dev/**/*.coffee"]
+				dest: "app/build/js/app.js"
+				options:
+					extensions: [".coffee"]
+					transform: ["coffeeify", "debowerify"]
+					bundleOptions:
+						debug: true
+					watch: true
+
+		connect:
+			build:
 				options:
 					livereload: true
-			coffee:
-				files:["app/dev/coffee/*.coffee"]
-				tasks:["coffee:dist"]
+					port: 9000
+					base: "app/build"
+			release:
 				options:
-					spawm:false
+					livereload: true
+					port: 9001
+					base: "app/release"
 
-		coffee:
-			dist:
+		clean: 
+			build:
+				["app/build"]
+
+		watch:
+			build_js:
 				files: [
-					expand:true
-					flatten:true
-					cwd:'app/dev/scripts'
-					src:['*.coffee']
-					dest:'app/build/js'
-					ext: '.js'
+					"app/build/js/app.js"
 				]
-		copy: 
+				tasks: []
+				options:
+					livereload: true
+
+		focus:
+			build:
+				include: ["build_js"]
+
+		copy:
 			main:
 				expand:true
 				cwd: 'app/dev/'
@@ -35,19 +54,13 @@ module.exports = (grunt) ->
 				cwd: 'app/dev/stylesheets'
 				src: '*.css'
 				dest:'app/build/css'
-			vendor:
-				expand:true
-				cwd: 'app/dev/vendor/jquery/dist'
-				src:'jquery.min.js'
-				dest:'app/build/vendor/jquery'				
 
+		require('load-grunt-tasks')(grunt)
 
-	for plugin in [
-			"grunt-contrib-watch"
-			"grunt-contrib-coffee"
-			"grunt-contrib-copy"
-	]
-			grunt.loadNpmTasks plugin
-
-
-	grunt.registerTask "default", ["coffee", "copy","watch"]
+		grunt.registerTask "default", [
+			"clean:build",
+			"copy",
+			"browserify:app",
+			"connect:build",
+			"focus:build"
+		]
