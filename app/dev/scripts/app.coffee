@@ -2,30 +2,45 @@
 $ = require("jquery")
 _ = require("underscore")
 
+main = require("../templates/main.html")
+login = require("../templates/login.html")
+
 user = {}
 
-$("#local-storage").prop("disabled", true)
-$(document).ready ->
-	userString = localStorage.getItem("user")
+showMainTemplate = (userString) ->
+	$('#app').html main
+	user = JSON.parse userString
+	$('#username').html(user.name + " " + user.id)
+	logoutEvent()
 
-	if userString?
-		user = JSON.parse userString
-		$('#no-user').css('display', 'none')
-		$('#user-exists').css('display', 'block')
-		$('#username').html(user.name + " " + user.id)
-	else
-		$('#no-user').css('display', 'block')
-		$('#user-exists').css('display', 'none')	
+showLoginTemplate = (userString) ->
+	$('#app').html login
+	loginEvent()
 
-	#localStorage.removeItem("username")
+logoutEvent = () ->
+	$("#delete-button").on "click", (event) ->
+		localStorage.removeItem("user")
+		showLoginTemplate()
+
+loginEvent = () ->
 	$("#save-button").on "click", (event) ->
+		console.log "test"
 		name = $("#username-input").val()
 		user.name = name
 		user.id = _.uniqueId()
 
 		localStorage.setItem "user", JSON.stringify user
-		window.location.reload()
+		userString = localStorage.getItem("user")
+		showMainTemplate(userString)
 
-	$("#delete-button").click ->
-		localStorage.removeItem("user")
-		window.location.reload()
+$(document).ready ->
+	userString = localStorage.getItem("user")
+	if userString?
+		showMainTemplate(userString)
+	else
+		showLoginTemplate()
+
+
+
+
+
