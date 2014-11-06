@@ -2,27 +2,7 @@
 $ = require("jquery")
 _ = require("underscore")
 
-###
-class User
-	id: null
-	name: null
-	age: null
-	constructor: () ->
-		
-	set: (attribute_name, attribute_value) ->
-		@[attribute_name] = attribute_value
-
-
-user = new User()
-
-user.set("name", "horst")
-user.set("id", 1)
-user.set("age", 21)
-user.name = "harry"
-console.log user
-###
 user = {}
-
 
 $("#local-storage").prop("disabled", true)
 $(document).ready ->
@@ -49,25 +29,3 @@ $(document).ready ->
 	$("#delete-button").click ->
 		localStorage.removeItem("user")
 		window.location.reload()
-
-
-###$(document).mousemove (event) ->
-	getPositionPointerXY(event)
-
-getPositionPointerXY = (event) ->
-	#Ermitteln der Position des Mouse Cursors
-	xPosition = event.pageX
-	yPosition = event.pageY
-	#Output der Funktionen wird in einer Variable gespeichert
-	positionOutput = 'Position: ' + xPosition + ', ' + yPosition
-
-	#Auswählen der Textarea in dem die Position angezeigt wird
-	textareaPointer = $('#pointer-textarea')
-
-	#Ausgabe der Position in der eben ausgewählten Textarea
-	textareaPointer[0].value = positionOutput
-
-	#Positioniert das Div direkt am Mauszeiger
-	$(".background-div").css
-		top: yPosition + "px"
-		left: xPosition + "px"###
