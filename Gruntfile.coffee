@@ -9,7 +9,7 @@ module.exports = (grunt) ->
 				dest: "app/build/js/app.js"
 				options:
 					extensions: [".coffee"]
-					transform: ["coffeeify", "debowerify"]
+					transform: ["html2js-browserify", "coffeeify", "debowerify"]
 					bundleOptions:
 						debug: true
 					watch: true
