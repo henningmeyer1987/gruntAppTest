@@ -5,8 +5,18 @@ _ = require("underscore")
 main = require("../templates/main.html")
 login = require("../templates/login.html")
 
+mixOf = (base, mixins...) ->
+  class Mixed extends base
+  for mixin in mixins by -1 #earlier mixins override later ones
+    for name, method of mixin::
+      Mixed::[name] = method
+  Mixed
+
+
 user = {}
 class Animal
+	testConsoleAnimal: ->
+		console.log "Animal Klasse"	
 	animalsList: []
 	name:null
 	selectAnimal: (animal_name) ->
@@ -29,7 +39,8 @@ addChainedAttributeAccessor = (obj, propertyAttr, attr) ->
 
 
 class AnimalDetails
-
+	testConsole: ->
+		console.log "AnimalDetails Klasse"	
 	@_animals: 0
 	@get_count: ->
 		@_animals
@@ -47,11 +58,23 @@ console.log AnimalDetails.get_count()
 TigerDetails = new AnimalDetails().name(Tiger.name).diet("Meat").population(1000).age(25)
 
 
+class AnimalWhole extends mixOf Animal, AnimalDetails
+	testAnswer: ->
+		@testConsole()
+		@testConsoleAnimal()
+
+
 console.log TigerDetails.animalinfo
 
 console.log AnimalDetails.get_count()
 console.log Tiger.name
 console.log Animal::animalsList[0]
+
+testSuperClass = new AnimalWhole()
+testSuperClass.testAnswer()
+#testSuperClass.testConsole()
+
+
 
 showMainTemplate = (userString) ->
 	$('#app').html main
@@ -70,7 +93,6 @@ logoutEvent = () ->
 
 loginEvent = () ->
 	$("#save-button").on "click", (event) ->
-		console.log "test"
 		name = $("#username-input").val()
 		user.name = name
 		user.id = _.uniqueId()
