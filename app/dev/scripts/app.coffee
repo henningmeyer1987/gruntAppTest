@@ -6,6 +6,16 @@ main = require("../templates/main.html")
 login = require("../templates/login.html")
 
 user = {}
+class Animal
+	name:null
+	selectAnimal: (animal_name) ->
+		@name = animal_name
+
+Tiger = new Animal()
+
+Tiger.selectAnimal("White Tiger")
+
+console.lo grTiger.name 
 
 showMainTemplate = (userString) ->
 	$('#app').html main
