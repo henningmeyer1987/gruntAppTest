@@ -4,6 +4,8 @@ _ = require("underscore")
 
 main = require("../templates/main.html")
 login = require("../templates/login.html")
+require("../user.coffee")
+
 
 user = {}
 
