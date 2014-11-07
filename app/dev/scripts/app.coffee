@@ -26,6 +26,9 @@ addChainedAttributeAccessor = (obj, propertyAttr, attr) ->
 
 
 class AnimalDetails
+	@_animals: 0
+	@get_count: ->
+		@_animals
 	constructor:  ->
 		@animalinfo=
 			name: null
@@ -33,14 +36,16 @@ class AnimalDetails
 			population: null
 			age:null
 		addChainedAttributeAccessor(this, 'animalinfo', attr) for attr of @animalinfo
+		@constructor._animals++
 
+console.log AnimalDetails.get_count()
 
 TigerDetails = new AnimalDetails().name(Tiger.name).diet("Meat").population(1000).age(25)
 
 
 console.log TigerDetails.animalinfo
 
-
+console.log AnimalDetails.get_count()
 console.log Tiger.name 
 
 showMainTemplate = (userString) ->
