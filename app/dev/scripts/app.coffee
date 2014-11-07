@@ -7,13 +7,16 @@ login = require("../templates/login.html")
 
 user = {}
 class Animal
+	animalsList: []
 	name:null
 	selectAnimal: (animal_name) ->
 		@name = animal_name
+		@animalsList.push animal_name
 
 Tiger = new Animal()
 
 Tiger.selectAnimal("White Tiger")
+Tiger.selectAnimal("Lion")
 
 addChainedAttributeAccessor = (obj, propertyAttr, attr) ->
 	obj[attr] = (newValues...) ->
@@ -26,6 +29,7 @@ addChainedAttributeAccessor = (obj, propertyAttr, attr) ->
 
 
 class AnimalDetails
+
 	@_animals: 0
 	@get_count: ->
 		@_animals
@@ -46,7 +50,8 @@ TigerDetails = new AnimalDetails().name(Tiger.name).diet("Meat").population(1000
 console.log TigerDetails.animalinfo
 
 console.log AnimalDetails.get_count()
-console.log Tiger.name 
+console.log Tiger.name
+console.log Animal::animalsList[0]
 
 showMainTemplate = (userString) ->
 	$('#app').html main
