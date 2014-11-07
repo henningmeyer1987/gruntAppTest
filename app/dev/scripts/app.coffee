@@ -15,17 +15,30 @@ Tiger = new Animal()
 
 Tiger.selectAnimal("White Tiger")
 
+addChainedAttributeAccessor = (obj, propertyAttr, attr) ->
+	obj[attr] = (newValues...) ->
+		if newValues.length == 0
+			obj[propertyAttr][attr]
+		else
+			obj[propertyAttr][attr] = newValues[0]
+			obj
+
+
+
 class AnimalDetails
-    constructor:  ->
-        @animalinfo=
-            name: "Wolf"
-            diet: null
-            population: null
-            age:null
+	constructor:  ->
+		@animalinfo=
+			name: null
+			diet: null
+			population: null
+			age:null
+		addChainedAttributeAccessor(this, 'animalinfo', attr) for attr of @animalinfo
 
-TigerDetails = new AnimalDetails("sad")
 
-console.log TigerDetails
+TigerDetails = new AnimalDetails().name(Tiger.name).diet("Meat").population(1000).age(25)
+
+
+console.log TigerDetails.animalinfo
 
 
 console.log Tiger.name 
