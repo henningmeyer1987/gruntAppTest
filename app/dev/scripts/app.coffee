@@ -4,15 +4,11 @@ _ = require("underscore")
 
 main = require("../templates/main.html")
 login = require("../templates/login.html")
-require("../user.coffee")
+User = require("./user.coffee")
 
-
-user = {}
-
-showMainTemplate = (userString) ->
+showMainTemplate = () ->
 	$('#app').html main
-	user = JSON.parse userString
-	$('#username').html(user.name + " " + user.id)
+	$('#username').html(User.get("name") + " " + User.get("id"))
 	logoutEvent()
 
 showLoginTemplate = (userString) ->
@@ -21,24 +17,20 @@ showLoginTemplate = (userString) ->
 
 logoutEvent = () ->
 	$("#delete-button").on "click", (event) ->
-		localStorage.removeItem("user")
+		User.destroy()
 		showLoginTemplate()
 
 loginEvent = () ->
 	$("#save-button").on "click", (event) ->
-		console.log "test"
 		name = $("#username-input").val()
-		user.name = name
-		user.id = _.uniqueId()
-
-		localStorage.setItem "user", JSON.stringify user
-		userString = localStorage.getItem("user")
-		showMainTemplate(userString)
+		User.set("id", _.uniqueId())
+		User.set("name", name)
+		User.save()
+		showMainTemplate()
 
 $(document).ready ->
-	userString = localStorage.getItem("user")
-	if userString?
-		showMainTemplate(userString)
+	if User.fetch() is true
+		showMainTemplate()
 	else
 		showLoginTemplate()
 
