@@ -15,7 +15,20 @@ Tiger = new Animal()
 
 Tiger.selectAnimal("White Tiger")
 
-console.lo grTiger.name 
+class AnimalDetails
+    constructor:  ->
+        @animalinfo=
+            name: "Wolf"
+            diet: null
+            population: null
+            age:null
+
+TigerDetails = new AnimalDetails("sad")
+
+console.log TigerDetails
+
+
+console.log Tiger.name 
 
 showMainTemplate = (userString) ->
 	$('#app').html main
