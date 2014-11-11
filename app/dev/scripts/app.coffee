@@ -1,6 +1,8 @@
 #Ruft getPositionPointerXY auf um die Positions des Cursors in die Textarea zu schreiben sobald das Event onmousemove auftritt
 $ = require("jquery")
 _ = require("underscore")
+backbone = require("backbone")
+
 
 main = require("../templates/main.html")
 login = require("../templates/login.html")
