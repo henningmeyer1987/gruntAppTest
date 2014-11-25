@@ -5,6 +5,8 @@ class User extends BaseModel
 	initialize:()->
 		if @get("id") is null
 			@set "id", localStorage.getItem("User")
+			@set "name", localStorage.getItem("User")
+
 	defaults:
 		id: null
 		name:null

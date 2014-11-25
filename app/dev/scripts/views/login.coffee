@@ -35,7 +35,9 @@ class LoginView extends BaseView
 
 	logout:(event)->
 		event.preventDefault()
+		User.destroy()
 		User.set("id", null)
 		User.set("name", null)
+
 
 module.exports = new LoginView()
