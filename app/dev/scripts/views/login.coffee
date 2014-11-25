@@ -19,7 +19,7 @@ class LoginView extends BaseView
 		@show()
 
 	show:()->
-		if User.get("id") isnt null
+		if User.get("id") >= 1
 			@render(@main_template)
 			$("#username").html(User.get("name"))
 			$("#user-id").html(User.get("id"))
@@ -32,10 +32,13 @@ class LoginView extends BaseView
 		User.set("id", _.uniqueId())
 		User.set("name", name)
 		User.save()
+		console.log User
 
 	logout:(event)->
 		event.preventDefault()
+		User.destroy()
 		User.set("id", null)
 		User.set("name", null)
+
 
 module.exports = new LoginView()
